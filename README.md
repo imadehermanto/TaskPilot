@@ -9,12 +9,12 @@ Designed to help companies or individuals manage projects, monitor task progress
 With a Filament-based admin interface, TaskPilot delivers a fast, responsive, and powerful user experience without the need to develop a dashboard from scratch.
 ## ✨ Features
 
-- Project & Task Management
-- Time Estimation & Realization
-- Kanban Board & Progress Chart
-- Multi-user Assignment
-- Time Tracking
-- Light/dark mode toggle
+- Project & Task Management 🛠️
+- Time Estimation & Realization 🛠️
+- Kanban Board & Progress Chart 🛠️
+- Multi-user Assignment 🛠️
+- Time Tracking 🛠️
+- Light/dark mode toggle ✅
 
 
 ##  🚀 Tech Stack
