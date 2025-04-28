@@ -14,6 +14,7 @@ With a Filament-based admin interface, TaskPilot delivers a fast, responsive, an
 - Kanban Board & Progress Chart 🛠️
 - Multi-user Assignment 🛠️
 - Time Tracking 🛠️
+- Role and Permission Management ✅
 - Light/dark mode toggle ✅
 
 
