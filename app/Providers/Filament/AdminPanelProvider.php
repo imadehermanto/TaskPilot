@@ -6,6 +6,7 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
+use Filament\Navigation\MenuItem;
 use Filament\Support\Colors\Color;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
@@ -17,10 +18,11 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
-use Filament\Navigation\MenuItem;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
+use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -33,6 +35,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
+            ->sidebarCollapsibleOnDesktop()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -53,8 +56,12 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                \Hasnayeen\Themes\Http\Middleware\SetTheme::class,
             ])
             ->plugins([
+                \Hasnayeen\Themes\ThemesPlugin::make(),
+                \TomatoPHP\FilamentPWA\FilamentPWAPlugin::make(),
+
                 FilamentShieldPlugin::make()
                     ->gridColumns([
                         'default' => 1,
@@ -76,14 +83,20 @@ class AdminPanelProvider extends PanelProvider
                     ->shouldRegisterNavigation(false)
                     ->shouldShowAvatarForm()
                     ->shouldShowDeleteAccountForm(false),
+                    
+                FilamentFullCalendarPlugin::make() // <-- Tambahkan ini
+                    ->selectable() // Opsional: aktifkan pilihan tanggal
+                    ->editable()   // Opsional: aktifkan edit drag & drop
+                    ->timezone('Asia/Jakarta') // Sesuaikan timezone
+                    ->locale('id') // Bahasa Indonesia
                 
             ])
-            ->userMenuItems([
-                'profile' => MenuItem::make()
-                    ->label(fn() => auth()->user()->name)
-                    ->url(fn (): string => EditProfilePage::getUrl())
-                    ->icon('heroicon-m-user-circle')
-            ])
+            // ->userMenuItems([
+            //     'profile' => MenuItem::make()
+            //         ->label(fn() => auth()->user()->name)
+            //         ->url(fn (): string => EditProfilePage::getUrl())
+            //         ->icon('heroicon-m-user-circle')
+            // ])
             ->authMiddleware([
                 Authenticate::class,
             ]);
