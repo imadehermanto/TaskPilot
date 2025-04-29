@@ -21,7 +21,7 @@ With a Filament-based admin interface, TaskPilot delivers a fast, responsive, an
 
 ##  🚀 Tech Stack
 
-- Laravel 11
+- Laravel 12
 - Filament v3
 - Livewire 3
 - Spatie Permission
